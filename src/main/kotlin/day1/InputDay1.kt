@@ -1,6 +1,6 @@
 package day1
 
-val input = """5800
+private val input1 = """5800
 2273
 1315
 5801
@@ -2250,6 +2250,6 @@ val input = """5800
 2912
 5664
 2775"""
-val list = input.split("\n\n").map {
+val list = input1.split("\n\n").map {
     it.split("\n")
 }
