@@ -1,4 +1,4 @@
-package day2
+package day02
 
 // 1 -> 2 -> 3 -> 1
 enum class Reason(val value: Int) {

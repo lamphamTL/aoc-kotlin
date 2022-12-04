@@ -1,4 +1,4 @@
-package day1
+package day01
 
 private val input1 = """5800
 2273

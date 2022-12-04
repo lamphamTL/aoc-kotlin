@@ -1,4 +1,4 @@
-package day3
+package day03
 
 fun main() {
     println(part1())

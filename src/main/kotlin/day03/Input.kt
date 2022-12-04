@@ -1,4 +1,4 @@
-package day3
+package day03
 
 private val inputString = """hDsDDttbhsmshNNWMNWGbTNqZq
 VQfjnlFvnQFRdZWdVtqMGdWW

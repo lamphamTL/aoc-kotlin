@@ -1,4 +1,4 @@
-package day2
+package day02
 
 fun part1(): Int {
     return list
