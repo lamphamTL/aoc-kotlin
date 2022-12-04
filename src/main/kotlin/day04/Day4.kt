@@ -13,7 +13,7 @@ private fun part1(): Int {
 
 private fun part2(): Int {
     return makeInput().count {
-        it[0] overlapPartially it[1] || it[1] overlapPartially it[0]
+        it[0] overlapPartially it[1]
     }
 }
 
