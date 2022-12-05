@@ -2,9 +2,19 @@ package utils
 
 import java.util.*
 
-fun <T> Stack<T>.popTo(stack: Stack<T>) {
-    if (!empty()) stack.push(pop())
+fun <T> Stack<T>.popTo(stack: Stack<T>, times: Int = 1) {
+    var count = times
+    while (!empty() && count != 0) {
+        stack.push(pop())
+        count--
+    }
 }
+fun <T> Stack<T>.popAllTo(stack: Stack<T>) {
+    while (!empty()) {
+        stack.push(pop())
+    }
+}
+
 fun <T> Stack<T>.popOrNull(): T? = if (empty()) null else pop()
 
 fun <T> Stack<T>.popToStack(number: Int): Stack<T> {

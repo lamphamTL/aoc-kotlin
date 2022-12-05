@@ -11,10 +11,7 @@ fun main() {
 private fun part1(): String {
     val (stacks, moves) = read()
     moves.forEach { (times, from, to) ->
-        (1..times).forEach {
-            val item = stacks[from].popOrNull() ?: return@forEach
-            stacks[to].push(item)
-        }
+        stacks[from].popTo(stacks[to], times)
     }
     return stacks.joinToString(separator = ""){
         it.pop().toString()
@@ -25,9 +22,7 @@ private fun part2(): String {
     val (stacks, moves) = read()
     moves.forEach { (times, from, to) ->
         val itemsToMove = stacks[from].popToStack(times)
-        while (!itemsToMove.empty()) {
-            itemsToMove.popTo(stacks[to])
-        }
+        itemsToMove.popAllTo(stacks[to])
     }
     return stacks.joinToString(separator = ""){
         it.pop().toString()
