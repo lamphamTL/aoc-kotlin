@@ -1,7 +1,6 @@
 package day05
 
-import utils.popOrNull
-import utils.remove
+import utils.*
 import java.util.Stack
 
 fun main() {
@@ -13,8 +12,8 @@ private fun part1(): String {
     val (stacks, moves) = read()
     moves.forEach { (times, from, to) ->
         (1..times).forEach {
-            val item = stacks[from - 1].popOrNull() ?: return@forEach
-            stacks[to - 1].push(item)
+            val item = stacks[from].popOrNull() ?: return@forEach
+            stacks[to].push(item)
         }
     }
     return stacks.joinToString(separator = ""){
@@ -25,14 +24,9 @@ private fun part1(): String {
 private fun part2(): String {
     val (stacks, moves) = read()
     moves.forEach { (times, from, to) ->
-        val itemToMove = Stack<Char>()
-        (1..times).forEach {
-            val item = stacks[from - 1].popOrNull() ?: return@forEach
-            itemToMove.push(item)
-        }
-        while (!itemToMove.empty()) {
-            val item = itemToMove.pop()
-            stacks[to - 1].push(item)
+        val itemsToMove = stacks[from].popToStack(times)
+        while (!itemsToMove.empty()) {
+            itemsToMove.popTo(stacks[to])
         }
     }
     return stacks.joinToString(separator = ""){
@@ -41,7 +35,7 @@ private fun part2(): String {
 }
 
 private fun read(): Pair<List<Stack<Char>>, List<Move>> {
-    var stackNumber: Int
+    val stackNumber: Int
     val (stackList, moveList) = input.partition {
         ".*\\[[A-Z]{1}\\].*".toRegex().matches(it)
     }.let {
@@ -52,21 +46,19 @@ private fun read(): Pair<List<Stack<Char>>, List<Move>> {
     stackList
         .reversed()
         .map {
-            var count = 0
-            it.chunked(4) {
-                if (it.isNotBlank()) {
-                    stack[count].push(it[1])
+            it.chunkedWithCount(4) { charSequence, count ->
+                if (charSequence.isNotBlank()) {
+                    stack[count].push(charSequence[1])
                 }
-                count++
             }
         }
     val operators = moveList.map {
-        val raw = it
+        val moveInput = it
             .remove("move ")
             .remove("from ")
             .remove("to ")
             .split(" ")
-        Move(raw[0].toInt(), raw[1].toInt(), raw[2].toInt())
+        Move(moveInput[0].toInt(), moveInput[1].toInt() - 1, moveInput[2].toInt() - 1)
     }
     return stack to operators
 }
