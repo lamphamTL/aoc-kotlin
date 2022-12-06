@@ -48,12 +48,12 @@ private fun read(): Pair<List<Stack<Char>>, List<Move>> {
             }
         }
     val operators = moveList.map {
-        val moveInput = it
+        val (move, from, to) = it
             .remove("move ")
             .remove("from ")
             .remove("to ")
             .split(" ")
-        Move(moveInput[0].toInt(), moveInput[1].toInt() - 1, moveInput[2].toInt() - 1)
+        Move(move.toInt(), from.toInt() - 1, to.toInt() - 1)
     }
     return stack to operators
 }
