@@ -49,7 +49,4 @@ private fun Point.follow(head: Point) {
     }
 }
 
-private data class Knot(
-    val tail: Knot? = null,
-    val point: Point,
-)
+private data class Knot(val tail: Knot? = null, val point: Point)
