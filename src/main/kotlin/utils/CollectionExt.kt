@@ -48,3 +48,5 @@ fun <R> CharSequence.chunkedWithCount(size: Int, transform: (CharSequence, Int) 
         }
     }
 }
+
+fun <T> List<T>.getValue(index: Int): T = get(index)!!
