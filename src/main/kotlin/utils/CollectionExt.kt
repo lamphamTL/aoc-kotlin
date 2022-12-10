@@ -50,3 +50,18 @@ fun <R> CharSequence.chunkedWithCount(size: Int, transform: (CharSequence, Int) 
 }
 
 fun <T> List<T>.getValue(index: Int): T = get(index)!!
+
+inline fun <T, R> Iterable<T>.mapSet(predicate: (T) -> R): Set<R> {
+    val result = mutableSetOf<R>()
+    forEach {
+        result.add(predicate.invoke(it))
+    }
+    return result
+}
+inline fun <T, R> Iterable<T>.flatMapSet(predicate: (T) -> Iterable<R>): Set<R> {
+    val result = mutableSetOf<R>()
+    forEach {
+        result.addAll(predicate.invoke(it))
+    }
+    return result
+}

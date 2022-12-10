@@ -9,4 +9,5 @@ fun Point.copy(p: Point) {
     x = p.x
     y = p.y
 }
+
 fun Point.copy(): Point = Point(x, y)
